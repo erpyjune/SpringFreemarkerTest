@@ -1,5 +1,7 @@
 package com.springapp.mvc.data;
 
+import java.util.List;
+
 /**
  * Created by baeonejune on 2015. 11. 9..
  */
@@ -19,6 +21,7 @@ public class ProductMainData {
     String seedUrl;
     String insertDate;
     String categoryName;
+    List<BlogExtBodyData> blogExtBodyList=null;
 
     public String getDataId() {
         return dataId;
@@ -138,5 +141,13 @@ public class ProductMainData {
 
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
+    }
+
+    public List<BlogExtBodyData> getBlogExtBodyList() {
+        return blogExtBodyList;
+    }
+
+    public void setBlogExtBodyList(List<BlogExtBodyData> blogExtBodyList) {
+        this.blogExtBodyList = blogExtBodyList;
     }
 }
