@@ -1,6 +1,7 @@
 package com.springapp.mvc.controller;
 
 import com.springapp.mvc.dao.CopyKingMapper;
+import com.springapp.mvc.data.ProductMainData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,13 +31,16 @@ public class HelloController {
 	@RequestMapping(value = "/get_data", method = RequestMethod.GET)
 	public String getMain(ModelMap model) throws Exception {
 
+		// product_id, product_name, product_url, thumb_url, spec1, spec2, seed_url, category
 		List<Map<String, Object>> mainDataAll = copyKingMapper.selectMainDataAll();
 		for (Map<String, Object> history : mainDataAll) {
-			String productName = (String) history.get("product_name");
-			String productUrl = (String) history.get("product_url");
+			ProductMainData productMainData = new ProductMainData();
+			productMainData.setProductId((String)history.get("product_id"));
+			productMainData.setProductName((String) history.get("product_name"));
+			productMainData.setProductUrl((String) history.get("product_url"));
 
-			logger.info(productName);
-			logger.info(productUrl);
+			logger.info(productMainData.getProductName());
+			logger.info(productMainData.getProductUrl());
 			logger.info("==========================================");
 		}
 
