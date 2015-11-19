@@ -18,6 +18,9 @@ public interface CopyKingMapper {
     @Select("SELECT post_image_url, post_title, post_desc, post_author, post_url  FROM blog_ext_body_data WHERE product_id=#{productId} limit 5")
     List<Map<String, Object>> selectBlogList(@Param("productId") String productId);
 
+    @Select("SELECT product_id, mall_name, reputation, url FROM reputation WHERE product_id=#{productId} limit 5")
+    List<Map<String, Object>> selectRepuList(@Param("productId") String productId);
+
 
 
 

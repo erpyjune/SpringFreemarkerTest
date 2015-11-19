@@ -22,6 +22,7 @@ public class ProductMainData {
     String insertDate;
     String categoryName;
     List<BlogExtBodyData> blogExtBodyList=null;
+    List<ReputationData> reputationDataList=null;
 
     public String getDataId() {
         return dataId;
@@ -149,5 +150,13 @@ public class ProductMainData {
 
     public void setBlogExtBodyList(List<BlogExtBodyData> blogExtBodyList) {
         this.blogExtBodyList = blogExtBodyList;
+    }
+
+    public List<ReputationData> getReputationDataList() {
+        return reputationDataList;
+    }
+
+    public void setReputationDataList(List<ReputationData> reputationDataList) {
+        this.reputationDataList = reputationDataList;
     }
 }

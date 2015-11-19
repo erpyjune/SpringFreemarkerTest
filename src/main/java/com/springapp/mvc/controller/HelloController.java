@@ -3,6 +3,7 @@ package com.springapp.mvc.controller;
 import com.springapp.mvc.dao.CopyKingMapper;
 import com.springapp.mvc.data.BlogExtBodyData;
 import com.springapp.mvc.data.ProductMainData;
+import com.springapp.mvc.data.ReputationData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,9 +35,9 @@ public class HelloController {
 	public String getMain(ModelMap model) throws Exception {
 
         List<Map<String, Object>> blogExtList;
-        List<ProductMainData> list = new ArrayList<ProductMainData>();
+		List<Map<String, Object>> mallRepuList;
+        List<ProductMainData> productMainDataList = new ArrayList<ProductMainData>();
 
-		// product_id, product_name, product_url, thumb_url, spec1, spec2, seed_url, category
 		List<Map<String, Object>> mainDataAll = copyKingMapper.selectMainDataAll();
 		for (Map<String, Object> history : mainDataAll) {
 			ProductMainData productMainData = new ProductMainData();
@@ -63,16 +64,31 @@ public class HelloController {
                 blogList.add(blogExtBodyData);
             }
 
+			// == get reputation
+			mallRepuList = copyKingMapper.selectRepuList(productMainData.getProductId());
+			List<ReputationData> reputationDatas = new ArrayList<ReputationData>();
+			for (Map<String, Object> repuData : mallRepuList) {
+				ReputationData reputationData = new ReputationData();
+				reputationData.setProductId((String)repuData.get("product_id"));
+				reputationData.setMallName((String) repuData.get("mall_name"));
+				reputationData.setRepuData((String) repuData.get("reputation"));
+				reputationData.setRepuUrl((String) repuData.get("url"));
+				reputationDatas.add(reputationData);
+			}
+
+			// set blog ext data
             productMainData.setBlogExtBodyList(blogList);
-            list.add(productMainData);
+			// set reputation data
+			productMainData.setReputationDataList(reputationDatas);
+			productMainDataList.add(productMainData);
 
 			logger.info(productMainData.getProductName());
 			logger.info(productMainData.getProductUrl());
 			logger.info("==========================================");
 		}
 
-        model.addAttribute("productList", list);
-		model.addAttribute("message", "Hello world!");
+        model.addAttribute("productList", productMainDataList);
+		model.addAttribute("message", "CopyWangTest !!!");
 
 		return "hello";
 	}
