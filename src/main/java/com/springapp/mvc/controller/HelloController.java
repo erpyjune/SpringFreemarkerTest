@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,13 +33,14 @@ public class HelloController {
 	}
 
 	@RequestMapping(value = "/get_data", method = RequestMethod.GET)
-	public String getMain(ModelMap model) throws Exception {
-
+	public String getMain(ModelMap model,
+                          @RequestParam(value = "from",  defaultValue = "0") int from,
+                          @RequestParam(value = "count", defaultValue = "10") int count) throws Exception {
         List<Map<String, Object>> blogExtList;
 		List<Map<String, Object>> mallRepuList;
         List<ProductMainData> productMainDataList = new ArrayList<ProductMainData>();
 
-		List<Map<String, Object>> mainDataAll = copyKingMapper.selectMainDataAll();
+		List<Map<String, Object>> mainDataAll = copyKingMapper.selectMainDataPage(from, count);
 		for (Map<String, Object> history : mainDataAll) {
 			ProductMainData productMainData = new ProductMainData();
 			productMainData.setProductId((String)history.get("product_id"));
@@ -64,7 +66,7 @@ public class HelloController {
                 blogList.add(blogExtBodyData);
             }
 
-			// == get reputation
+			// == get shopping mall reputation
 			mallRepuList = copyKingMapper.selectRepuList(productMainData.getProductId());
 			List<ReputationData> reputationDatas = new ArrayList<ReputationData>();
 			for (Map<String, Object> repuData : mallRepuList) {

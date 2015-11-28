@@ -15,6 +15,9 @@ public interface CopyKingMapper {
     @Select("SELECT product_id, product_name, product_url, thumb_url, spec1, spec2, seed_url, category FROM product_main limit 20")
     List<Map<String, Object>> selectMainDataAll();
 
+    @Select("SELECT product_id, product_name, product_url, thumb_url, spec1, spec2, seed_url, category FROM product_main limit #{from}, #{count}")
+    List<Map<String, Object>> selectMainDataPage(@Param("from") int from, @Param("count") int count);
+
     @Select("SELECT post_image_url, post_title, post_desc, post_author, post_url  FROM blog_ext_body_data WHERE product_id=#{productId} limit 5")
     List<Map<String, Object>> selectBlogList(@Param("productId") String productId);
 
