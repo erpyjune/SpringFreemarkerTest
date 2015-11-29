@@ -158,8 +158,8 @@
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
+                    <source>1.7</source>
+                    <target>1.7</target>
                 </configuration>
             </plugin>
             <plugin>
@@ -170,58 +170,17 @@
                     </includes>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.2.1</version>
+                <configuration>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
-
-    <!--<repositories>-->
-        <!--<repository>-->
-            <!--<id>daum-public</id>-->
-            <!--<url>http://maven.daumcorp.com/content/groups/daum-public</url>-->
-            <!--<releases>-->
-                <!--<updatePolicy>always</updatePolicy>-->
-            <!--</releases>-->
-            <!--<snapshots>-->
-                <!--<updatePolicy>always</updatePolicy>-->
-            <!--</snapshots>-->
-        <!--</repository>-->
-        <!--<repository>-->
-            <!--<id>daum-searchplatform-group</id>-->
-            <!--<url>http://maven.daumcorp.com/content/groups/daum-searchplatform-group/</url>-->
-            <!--<releases>-->
-                <!--<updatePolicy>always</updatePolicy>-->
-            <!--</releases>-->
-            <!--<snapshots>-->
-                <!--<updatePolicy>always</updatePolicy>-->
-            <!--</snapshots>-->
-        <!--</repository>-->
-    <!--</repositories>-->
-
-    <!--<distributionManagement>-->
-        <!--<repository>-->
-            <!--<id>daum-searchplatform</id>-->
-            <!--<name>net.daum.searchplatform Repository</name>-->
-            <!--<url>http://maven.daumcorp.com/content/repositories/daum-searchplatform-->
-            <!--</url>-->
-        <!--</repository>-->
-        <!--<snapshotRepository>-->
-            <!--<id>daum-searchplatform-snapshots</id>-->
-            <!--<name>net.daum.searchplatform Repository</name>-->
-            <!--<url>http://maven.daumcorp.com/content/repositories/daum-searchplatform-snapshots-->
-            <!--</url>-->
-        <!--</snapshotRepository>-->
-    <!--</distributionManagement>-->
-
-    <!--<pluginRepositories>-->
-        <!--<pluginRepository>-->
-            <!--<id>daum-public</id>-->
-            <!--<url>http://maven.daumcorp.com/content/groups/daum-public</url>-->
-            <!--<releases>-->
-                <!--<updatePolicy>always</updatePolicy>-->
-            <!--</releases>-->
-            <!--<snapshots>-->
-                <!--<updatePolicy>always</updatePolicy>-->
-            <!--</snapshots>-->
-        <!--</pluginRepository>-->
-    <!--</pluginRepositories>-->
 
 </project>
