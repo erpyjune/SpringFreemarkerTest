@@ -150,7 +150,30 @@
             </exclusions>
             <scope>runtime</scope>
         </dependency>
+        <!-- for json -->
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-core-asl</artifactId>
+            <version>1.8.0</version>
+            <type>jar</type>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-mapper-asl</artifactId>
+            <version>1.8.0</version>
+            <type>jar</type>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-xc</artifactId>
+            <version>1.8.0</version>
+            <type>jar</type>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
+
 
     <build>
         <finalName>SpringFreemarkerTest</finalName>
