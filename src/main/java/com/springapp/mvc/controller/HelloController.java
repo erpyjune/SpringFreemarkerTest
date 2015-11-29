@@ -96,7 +96,7 @@ public class HelloController {
 		return "hello";
 	}
 
-    @RequestMapping(value = "/get", method = RequestMethod.GET)
+    @RequestMapping(value = "/get.json", method = RequestMethod.GET)
     @ResponseBody
     public List<ProductMainData> getData(ModelMap model,
                           @RequestParam(value = "from",  defaultValue = "0") int from,
