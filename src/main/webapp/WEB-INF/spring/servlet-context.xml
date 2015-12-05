@@ -50,17 +50,17 @@
 
 
     <!-- ========================================================= Freemarker setting ========================================================= -->
-    <!--<bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">-->
-        <!--<property name="templateLoaderPath" value="/WEB-INF/ftl/"/>-->
-    <!--</bean>-->
+    <bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+        <property name="templateLoaderPath" value="/WEB-INF/ftl/"/>
+    </bean>
 
     <!-- ========================================================= Freemarker setting ========================================================= -->
-    <!--<bean id="viewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">-->
-        <!--<property name="contentType" value="text/html;charset=UTF-8"/>-->
-        <!--<property name="cache" value="true"/>-->
-        <!--<property name="prefix" value=""/>-->
-        <!--<property name="suffix" value=".ftl"/>-->
-    <!--</bean>-->
+    <!-- <bean id="viewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+        <property name="contentType" value="text/html;charset=UTF-8"/>
+        <property name="cache" value="true"/>
+        <property name="prefix" value=""/>
+        <property name="suffix" value=".ftl"/>
+    </bean> -->
 
     <!-- ========================================================= Setting Data Source ========================================================= -->
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
