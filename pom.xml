@@ -176,7 +176,7 @@
 
 
     <build>
-        <finalName>SpringFreemarkerTest</finalName>
+        <finalName>copywangweb</finalName>
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>

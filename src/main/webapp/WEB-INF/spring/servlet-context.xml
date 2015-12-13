@@ -55,12 +55,12 @@
     </bean>
 
     <!-- ========================================================= Freemarker setting ========================================================= -->
-    <!-- <bean id="viewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
         <property name="contentType" value="text/html;charset=UTF-8"/>
         <property name="cache" value="true"/>
         <property name="prefix" value=""/>
         <property name="suffix" value=".ftl"/>
-    </bean> -->
+    </bean>
 
     <!-- ========================================================= Setting Data Source ========================================================= -->
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
