@@ -4,9 +4,12 @@ import com.springapp.mvc.dao.CopyKingMapper;
 import com.springapp.mvc.data.BlogExtBodyData;
 import com.springapp.mvc.data.ProductMainData;
 import com.springapp.mvc.data.ReputationData;
+import com.springapp.mvc.data.proxy.ProxyData;
+import com.springapp.mvc.data.proxy.ProxyMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +17,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.ServletContext;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -26,6 +33,9 @@ public class HelloController {
 
 	@Autowired
 	CopyKingMapper copyKingMapper;
+
+    private @Autowired
+    ServletContext servletContext;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String printWelcome(ModelMap model) {
@@ -158,5 +168,48 @@ public class HelloController {
         model.addAttribute("message", "CopyWangTest !!!");
 
         return productMainDataList;
+    }
+
+
+    @RequestMapping(value = "/get_proxy", method = RequestMethod.GET)
+    @ResponseBody
+    public ProxyMap getProxyList(ModelMap model,
+                                 @RequestParam(value = "count", defaultValue = "10") int count) throws Exception {
+        ProxyMap proxyMap = new ProxyMap();
+        List<ProxyData> proxyDataArrayList = new ArrayList<ProxyData>();
+        InputStream inputStream = null;
+        try {
+            inputStream = servletContext.getResourceAsStream("/WEB-INF/proxy/data.txt");
+            if (inputStream==null) {
+                proxyMap.setReturnCode(700);
+                proxyMap.setErrorMessage("inputStream is null");
+                proxyMap.setProxyDataList(null);
+                return proxyMap;
+            }
+
+            String s;
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+            while ((s=bufferedReader.readLine())!=null){
+                ProxyData proxyData = new ProxyData();
+                proxyData.setIp(s.trim());
+                proxyData.setPort(80);
+                proxyDataArrayList.add(proxyData);
+            }
+
+            proxyMap.setProxyDataList(proxyDataArrayList);
+
+            if (proxyDataArrayList.size() <= 0) {
+                proxyMap.setTotalCount(0);
+                proxyMap.setReturnCode(701);
+                proxyMap.setErrorMessage("proxy server list count 0");
+                proxyMap.setProxyDataList(null);
+            }
+        } finally {
+            if (inputStream != null) {
+                inputStream.close();
+            }
+        }
+
+        return proxyMap;
     }
 }
